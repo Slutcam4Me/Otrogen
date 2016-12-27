@@ -30,7 +30,7 @@ $GEngine->Connect();
 		<div class="row">
             <ul class="nav">
 			<li class="col-sm-2"><a href="#">Otrogen.Se</a></li>
-              <li class="active col-sm-2"><a href="index.php?p=MinProfil">Min Profil</a></li>
+              <li class="active col-sm-2"><a href="index.php?p=MinProfil&user=<?php echo $_SESSION['username']; ?>">Min Profil</a></li>
               <li class="col-sm-2"><a href="index.php?p=Sok">Sök</a></li>
               <li class="col-sm-2"><a href="index.php?p=LoggaUt">Logout</a></li>
             </ul>
@@ -57,7 +57,13 @@ $GEngine->Connect();
 			}
 			if(strcmp($_GET['p'], 'MinProfil') == 0)
 			{
-				
+				if($_SESSION['username'])
+				{
+				require_once('modules/profil.php');
+				}else
+				{
+					header('Location: index.php?p=loggain');
+				}
 				
 			}
 				if(strcmp($_GET['p'], 'Sok') == 0)

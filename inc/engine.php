@@ -21,12 +21,33 @@ class CEngine
 		mysql_close();
 	}
 	
-
-	
-
+	public function GetProfil($user)
+	{
+		$query = mysql_query("SELECT * FROM user WHERE user_name='$user'") or die(mysql_error());
+		return mysql_fetch_array($query, MYSQL_ASSOC);
+		
+	}
 	
 	/*
-	 * Adds bot to Database from Ident packet.
+	*Update user profile
+	*/
+	public function ChangeProfile($user,$profile)
+	{
+		$query = mysql_query("SELECT * FROM user WHERE user_name='$user'") or die(mysql_error());
+		if(mysql_num_rows($query) == 1)
+		{
+			
+			mysql_query("UPDATE user SET user_profile='$profile' WHERE user_name='$user'");
+		}
+		else
+		{
+			echo "kuken du finns";
+		}
+		
+	}
+	
+	/*
+	 * Add NewUser
 	 */
 	public function AddNewUser($user, $password)
 	{
@@ -43,9 +64,6 @@ class CEngine
 		
 	}
 	
-
-	
-
 	
 	/*
 	 * Log in
